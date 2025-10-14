@@ -14,6 +14,7 @@ struct ImageComparisonView: View {
     let isLeft: Bool
     @ObservedObject var viewModel: ImageViewModel
     @State private var overlayOpacity: Double = 0.5
+    @State private var animatedOpacity: Double = 0.5
     @State private var isAnimating: Bool = false
     @State private var animationTimer: Timer?
     
@@ -71,21 +72,24 @@ struct ImageComparisonView: View {
     private func startAnimation() {
         isAnimating = true
         
+        // Always start animated opacity from 0 for consistent animation
+        animatedOpacity = 0.0
+        
         // Use a timer to create controllable animation cycles
         animationTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true) { _ in
             guard self.isAnimating else {
                 return
             }
             
-            // Toggle opacity with animation
+            // Animate from current position to opposite end (full range 0-1)
             withAnimation(.easeInOut(duration: 2.0)) {
-                self.overlayOpacity = self.overlayOpacity > 0.5 ? 0.0 : 1.0
+                self.animatedOpacity = self.animatedOpacity == 0.0 ? 1.0 : 0.0
             }
         }
         
-        // Start the first animation immediately
+        // Start the first animation immediately (0 -> 1)
         withAnimation(.easeInOut(duration: 2.0)) {
-            overlayOpacity = overlayOpacity < 0.5 ? 1.0 : 0.0
+            animatedOpacity = 1.0
         }
     }
     
@@ -105,7 +109,9 @@ struct ImageComparisonView: View {
             if isLeft {
                 return image
             } else if let rightImage = viewModel.rightImage, let leftImage = viewModel.leftImage {
-                return createOverlayImage(base: leftImage, overlay: rightImage, opacity: overlayOpacity)
+                // Use animated opacity when animating, otherwise use slider value
+                let effectiveOpacity = isAnimating ? animatedOpacity : overlayOpacity
+                return createOverlayImage(base: leftImage, overlay: rightImage, opacity: effectiveOpacity)
             }
             return image
         case .difference:
