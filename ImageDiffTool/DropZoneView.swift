@@ -104,12 +104,17 @@ class DropView: NSView {
             return []
         }
         
-        for url in fileURLs {
-            if let uti = try? url.resourceValues(forKeys: [.contentTypeKey]).contentType,
-               supportedTypes.contains(where: { $0.conforms(to: uti) }) {
-                onHoverChange?(true)
-                return .copy
+        // Check if we have at least one supported image
+        let hasSupportedImage = fileURLs.contains { url in
+            guard let uti = try? url.resourceValues(forKeys: [.contentTypeKey]).contentType else {
+                return false
             }
+            return supportedTypes.contains(where: { $0.conforms(to: uti) })
+        }
+        
+        if hasSupportedImage {
+            onHoverChange?(true)
+            return .copy
         }
         
         return []
@@ -124,25 +129,41 @@ class DropView: NSView {
         
         let pasteboard = sender.draggingPasteboard
         
-        guard let fileURLs = pasteboard.readObjects(forClasses: [NSURL.self]) as? [URL],
-              let url = fileURLs.first else {
+        guard let fileURLs = pasteboard.readObjects(forClasses: [NSURL.self]) as? [URL] else {
             return false
         }
         
-        // Verify it's a supported image format
-        if let uti = try? url.resourceValues(forKeys: [.contentTypeKey]).contentType,
-           supportedTypes.contains(where: { $0.conforms(to: uti) }) {
-            
-            DispatchQueue.main.async {
+        // Filter to only supported image formats
+        let supportedImageURLs = fileURLs.filter { url in
+            guard let uti = try? url.resourceValues(forKeys: [.contentTypeKey]).contentType else {
+                return false
+            }
+            return supportedTypes.contains(where: { $0.conforms(to: uti) })
+        }
+        
+        guard !supportedImageURLs.isEmpty else {
+            return false
+        }
+        
+        DispatchQueue.main.async {
+            // Check if we have exactly 2 images and both drop zones are empty
+            if supportedImageURLs.count == 2,
+               self.viewModel?.leftImage == nil,
+               self.viewModel?.rightImage == nil {
+                // Auto-populate both drop zones
+                self.viewModel?.setLeftImage(from: supportedImageURLs[0])
+                self.viewModel?.setRightImage(from: supportedImageURLs[1])
+            } else {
+                // Original behavior: set image for the current drop zone
+                let url = supportedImageURLs.first!
                 if self.isLeft {
                     self.viewModel?.setLeftImage(from: url)
                 } else {
                     self.viewModel?.setRightImage(from: url)
                 }
             }
-            return true
         }
         
-        return false
+        return true
     }
 }
