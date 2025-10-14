@@ -1,3 +1,11 @@
+//
+//  ContentView.swift
+//  ImageDiffTool
+//
+//  Created by Gaurav Keshre on 14/10/25.
+//  Copyright © Gaurav Keshre. All rights reserved.
+//
+
 import SwiftUI
 
 struct ContentView: View {
