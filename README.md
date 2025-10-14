@@ -8,11 +8,15 @@ A simple and elegant macOS application for visually comparing images with drag-a
 
 ## Features
 
-- **Drag & Drop Interface**: Simply drag images into the left and right panels
+- **Smart Drag & Drop Interface**: 
+  - Simply drag images into the left and right panels
+  - **Auto-populate**: Drop 2 images simultaneously to automatically fill both panels
 - **Multiple Comparison Modes**:
-  - Side by Side: View images side by side for manual comparison
-  - Overlay: Overlay one image on top of the other with adjustable opacity
-  - Difference: Generate a visual difference highlighting changed pixels
+  - **Side by Side**: View images side by side for manual comparison
+  - **Overlay**: Overlay one image on top of the other with adjustable opacity
+    - **Animated Opacity**: Play/pause button for continuous opacity animation loop
+    - Manual opacity control with real-time slider
+  - **Difference**: Generate a visual difference highlighting changed pixels
 - **Wide Format Support**: Supports PNG, JPG, JPEG, GIF, TIFF, HEIC, WebP, BMP, ICO, AVIF
 - **Export Functionality**: Save difference images as PNG files
 - **Clean, Minimal UI**: Inspired by modern diff tools with a dark theme
@@ -72,11 +76,14 @@ A pre-built version will be available for download. Simply download the `.app` f
 
 1. **Launch the Application**: Run the app from Xcode or after building
 2. **Load Images**: 
-   - Drag an image file into the "Left" panel
-   - Drag another image file into the "Right" panel
+   - **Single Image**: Drag an image file into the "Left" or "Right" panel
+   - **Two Images**: Drag 2 images simultaneously to auto-populate both panels
 3. **Choose Comparison Mode**:
    - **Side by Side**: Default mode for manual comparison
-   - **Overlay**: Blend images with adjustable opacity slider
+   - **Overlay**: Blend images with adjustable opacity
+     - Use the opacity slider for manual control
+     - Click the ▶️ play button to start automatic opacity animation loop
+     - Click the ⏸️ pause button to stop animation at current opacity
    - **Difference**: Generate pixel-level difference visualization
 4. **Compare**: Click the "Compare" button to process the images
 5. **Export**: Use "Export Difference" to save the difference image
@@ -97,6 +104,13 @@ A pre-built version will be available for download. Simply download the `.app` f
 - `ImageViewModel.swift`: Core business logic and image processing
 - `ImageDiffToolApp.swift`: Application entry point
 
+## Recent Updates
+
+### Version 1.1 Features:
+- ✅ **Smart Multi-File Drop**: Auto-populate both drop zones when dropping 2 images
+- ✅ **Animated Overlay Mode**: Continuous opacity animation with play/pause controls
+- ✅ **Enhanced User Experience**: Improved drag-and-drop feedback and visual indicators
+
 ## Future Enhancements
 
 - Zoom and pan functionality
@@ -105,6 +119,8 @@ A pre-built version will be available for download. Simply download the `.app` f
 - Additional blend modes
 - Keyboard shortcuts
 - Preference settings
+- Animation speed control
+- Custom animation patterns
 
 ## Adding Screenshots
 
@@ -114,6 +130,8 @@ To add your own screenshot to this README:
 2. Save it as `screenshot.png` in the project root directory
 3. The README already references the image with: `![Image Diff Tool Screenshot](screenshot.png)`
 4. Or run `./screenshot-guide.sh` for detailed instructions
+
+> **Note**: A screenshot has been provided showing the app's clean interface with dual drop zones and comparison mode controls. Please add the screenshot.png file to display it in the README.
 
 ## License
 
