@@ -71,8 +71,20 @@ struct ImageComparisonView: View {
     private func startAnimation() {
         isAnimating = true
         
-        // Animate the slider value directly, which will update overlayOpacity
-        withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
+        // Use a timer to create controllable animation cycles
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true) { _ in
+            guard self.isAnimating else {
+                return
+            }
+            
+            // Toggle opacity with animation
+            withAnimation(.easeInOut(duration: 2.0)) {
+                self.overlayOpacity = self.overlayOpacity > 0.5 ? 0.0 : 1.0
+            }
+        }
+        
+        // Start the first animation immediately
+        withAnimation(.easeInOut(duration: 2.0)) {
             overlayOpacity = overlayOpacity < 0.5 ? 1.0 : 0.0
         }
     }
@@ -82,10 +94,7 @@ struct ImageComparisonView: View {
         animationTimer?.invalidate()
         animationTimer = nil
         
-        // Stop any ongoing animations
-        withAnimation(.easeOut(duration: 0.3)) {
-            // Keep current opacity value
-        }
+        // No need to change the current opacity value - it stays where it stopped
     }
     
     private var displayImage: NSImage? {
