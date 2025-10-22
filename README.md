@@ -1,126 +1,47 @@
+<div align="center">
+  <img src="screenshots/icon.png" alt="Image Diff Tool Icon" width="128" height="128">
+</div>
+
 # Image Diff Tool
 
 A simple and elegant macOS application for visually comparing images with drag-and-drop functionality.
 
-![Image Diff Tool Screenshot](screenshot.png)
-
-*The app features a clean, dark-themed interface with split-view panels for side-by-side image comparison, multiple comparison modes, and intuitive drag-and-drop functionality.*
+![Image Diff Tool Screenshot](screenshots/screenshot1.png)
 
 ## Features
 
-- **Smart Drag & Drop Interface**: 
-  - Simply drag images into the left and right panels
-  - **Auto-populate**: Drop 2 images simultaneously to automatically fill both panels
-- **Multiple Comparison Modes**:
-  - **Side by Side**: View images side by side for manual comparison
-  - **Overlay**: Overlay one image on top of the other with adjustable opacity
-    - **Animated Opacity**: Play/pause button for continuous opacity animation loop
-    - Manual opacity control with real-time slider
-  - **Difference**: Generate a visual difference highlighting changed pixels
-- **Wide Format Support**: Supports PNG, JPG, JPEG, GIF, TIFF, HEIC, WebP, BMP, ICO, AVIF
-- **Export Functionality**: Save difference images as PNG files
-- **Clean, Minimal UI**: Inspired by modern diff tools with a dark theme
-
-## Screenshots
-
-The application features a modern, intuitive interface:
-
-- **Main Interface**: Split-view design with left and right image panels
-- **Drop Zones**: Clear visual indicators for drag-and-drop functionality
-- **Mode Selection**: Easy switching between Side by Side, Overlay, and Difference modes
-- **Control Bar**: Compare, Export Difference, and Clear buttons for workflow management
-- **File Path Display**: Shows the names of currently loaded images
-
-## Supported Image Formats
-
-- PNG (.png)
-- JPEG (.jpg, .jpeg, .jpe, .jfif)
-- GIF (.gif)
-- TIFF (.tiff, .tif)
-- HEIC (.heic)
-- WebP (.webp)
-- BMP (.bmp)
-- ICO (.ico)
-- AVIF (.avif)
+- **Smart Drag & Drop**: Drop images into panels or drop 2 images simultaneously to auto-populate both sides
+- **Comparison Modes**:
+  - **Side by Side**: Manual comparison view
+  - **Overlay**: Adjustable opacity blending with animated loop option
+  - **Difference**: Visual highlighting of changed pixels
+- **Wide Format Support**: PNG, JPG, GIF, TIFF, HEIC, WebP, BMP, ICO, AVIF
+- **Export**: Save difference images as PNG files
 
 ## Requirements
 
 - macOS 13.0 or later
-- Xcode 15.0 or later (for building from source)
+- Xcode 15.0 or later (for building)
 
-## Quick Start
+## Installation
 
-### Option 1: Download Pre-built App (Coming Soon)
-A pre-built version will be available for download. Simply download the `.app` file and drag it to your Applications folder.
+### Build from Source
+1. Clone the repository
+2. Open `ImageDiffTool.xcodeproj` in Xcode
+3. Select your development team and press Cmd+R to build and run
 
-### Option 2: Build from Source
+## Usage
 
-#### Building the App from Source
+1. **Load Images**: Drag image files into left/right panels
+2. **Select Mode**: Choose Side by Side, Overlay, or Difference
+3. **Compare**: Click "Compare" to process images
+4. **Export**: Save difference images with "Export Difference"
 
-1. Open Terminal and navigate to the project directory:
-   ```bash
-   cd /Users/gauravkeshre/Downloads/ImageDiffTool
-   ```
+## Technical Stack
 
-2. Open the project in Xcode:
-   ```bash
-   open ImageDiffTool.xcodeproj
-   ```
-
-3. In Xcode:
-   - Select your development team in the project settings if needed
-   - Choose "ImageDiffTool" scheme and "My Mac" as the destination
-   - Press Cmd+R to build and run
-
-## How to Use
-
-1. **Launch the Application**: Run the app from Xcode or after building
-2. **Load Images**: 
-   - **Single Image**: Drag an image file into the "Left" or "Right" panel
-   - **Two Images**: Drag 2 images simultaneously to auto-populate both panels
-3. **Choose Comparison Mode**:
-   - **Side by Side**: Default mode for manual comparison
-   - **Overlay**: Blend images with adjustable opacity
-     - Use the opacity slider for manual control
-     - Click the ▶️ play button to start automatic opacity animation loop
-     - Click the ⏸️ pause button to stop animation at current opacity
-   - **Difference**: Generate pixel-level difference visualization
-4. **Compare**: Click the "Compare" button to process the images
-5. **Export**: Use "Export Difference" to save the difference image
-6. **Clear**: Use "Clear" to start over with new images
-
-## Technical Details
-
-- Built with SwiftUI for modern macOS development
-- Uses Core Image for advanced image processing and difference generation
-- Implements proper drag-and-drop using NSView and UTType system
-- Sandboxed application with appropriate entitlements for file access
-
-## Architecture
-
-- `ContentView.swift`: Main application interface
-- `ImageComparisonView.swift`: Individual image panel component
-- `DropZoneView.swift`: Drag-and-drop handling and visual feedback
-- `ImageViewModel.swift`: Core business logic and image processing
-- `ImageDiffToolApp.swift`: Application entry point
-
-## Recent Updates
-
-### Version 1.1 Features:
-- ✅ **Smart Multi-File Drop**: Auto-populate both drop zones when dropping 2 images
-- ✅ **Animated Overlay Mode**: Continuous opacity animation with play/pause controls
-- ✅ **Enhanced User Experience**: Improved drag-and-drop feedback and visual indicators
-
-## Future Enhancements
-
-- Zoom and pan functionality
-- Histogram comparison
-- Batch processing
-- Additional blend modes
-- Keyboard shortcuts
-- Preference settings
-- Animation speed control
-- Custom animation patterns
+- SwiftUI for UI development
+- Core Image for image processing
+- NSView for drag-and-drop functionality
 
 ## License
 
