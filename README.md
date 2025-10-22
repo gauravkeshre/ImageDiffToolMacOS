@@ -122,17 +122,6 @@ A pre-built version will be available for download. Simply download the `.app` f
 - Animation speed control
 - Custom animation patterns
 
-## Adding Screenshots
-
-To add your own screenshot to this README:
-
-1. Run the app and take a screenshot (Cmd+Shift+4, then Spacebar to capture the window)
-2. Save it as `screenshot.png` in the project root directory
-3. The README already references the image with: `![Image Diff Tool Screenshot](screenshot.png)`
-4. Or run `./screenshot-guide.sh` for detailed instructions
-
-> **Note**: A screenshot has been provided showing the app's clean interface with dual drop zones and comparison mode controls. Please add the screenshot.png file to display it in the README.
-
 ## License
 
 This project is provided as-is for educational and personal use.
